@@ -1,0 +1,139 @@
+Skip to content
+
+Search or jump to...
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+ 
+@Naman-2003 
+Naman-2003
+/
+Lnb-project
+Public
+Cannot fork because you own this repository and are not a member of any organizations.
+Code
+Issues
+4
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+Commit
+Browse the repository at this point in the history
+Weather_Report
+ main
+@Naman-2003
+Naman-2003 committed on Apr 30 
+1 parent 5384e5b
+commit 121e003
+Showing 1 changed file with 74 additions and 0 deletions.
+ 74 changes: 74 additions & 0 deletions74  
+Weather_Report
+@@ -0,0 +1,74 @@
+package Learn_and_Build;
+
+import java.net.URL;
+import java.net.HttpURLConnection;
+import java.util.Scanner;
+import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+
+public class W_R {
+    public static void main(String[] args) {
+        try {
+            URL url = new URL("http://api.openweathermap.org/geo/1.0/direct?q=PATNA,BR,IN&limit=5&appid=15f63bb69dc36a090d4ece421e15a0ce");
+            /** Here we establish an url connection
+              // Create a HttpURLConnection object to send the GET request **/
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.connect(); /** **/
+
+           int rc = con.getResponseCode(); // Check if the response code is 200, which means the request was successful
+            System.out.println("The connection's ResponseCode is: " + rc);
+            if (rc != 200) {
+                System.out.println("Error 404 " + " Try After sometimes");
+            } else {
+                String data = "";
+                // Check if the response code is 200, which means the request was successful
+                Scanner sc = new Scanner(url.openStream());
+
+                // Read the response body line by line and append it to a string
+                while (sc.hasNext()) {
+                    data += sc.nextLine();
+                }
+                sc.close();
+
+
+                // Parse the response body as a JSONArray
+                JSONParser par = new JSONParser(); // creating a class of par method
+                JSONArray arr = (JSONArray) par.parse(data);
+                System.out.println(arr);
+
+                JSONObject obj = null; // To store the array of all the element of arr( i,e line no.37)
+
+                // Loop through the JSONArray and extract the latitude and longitude of each city
+                for (int i = 0; i < arr.size(); i++) {
+                    obj = (JSONObject) arr.get(i);
+
+                    /** TypeCasting **/
+                   double lon = (double) obj.get("lon"); // implicit conversion --- means forcefully (lower datatype to higher datatype)
+                    double lat = (double) obj.get("lat");
+
+                    // Print the name, latitude and longitude of the city
+                    System.out.println("Name of Country:" +obj.get("country"));
+                    System.out.println("Name of State:" +obj.get("state"));
+                    System.out.println("Name of city:" +obj.get("name"));
+                    System.out.println("Latitude : " +lat);
+                    System.out.println("Longitude :"+lon);
+
+                        /** Pseudo Code
+                           1. Geocoding URL - connection
+                           2. data fetch - lat , lon
+                           3. pass this lat & lon to WeatherAPI
+                           4. data fetch - temp , pressure
+                        **/
+
+                }
+
+            }
+        }
+       catch(Exception e){}
+    }
+}
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+0 comments on commit 121e003
+@Naman-2003
+ 
+Add heading textAdd bold text, <Ctrl+b>Add italic text, <Ctrl+i>
+Add a quote, <Ctrl+Shift+.>Add code, <Ctrl+e>Add a link, <Ctrl+k>
+Add a bulleted list, <Ctrl+Shift+8>Add a numbered list, <Ctrl+Shift+7>Add a task list, <Ctrl+Shift+l>
+Directly mention a user or team
+Reference an issue, pull request, or discussion
+Add saved reply
+Leave a comment
+No file chosen
+Attach files by dragging & dropping, selecting or pasting them.
+Styling with Markdown is supported
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Weather_Report · Naman-2003/Lnb-project@121e003
